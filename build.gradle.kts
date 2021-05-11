@@ -1,5 +1,5 @@
 plugins {
-    kotlin("js") version "1.4.32"
+    kotlin("multiplatform") version "1.4.32"
     id("org.jetbrains.compose") version "0.0.0-web-dev-12"
 }
 
@@ -9,11 +9,6 @@ version = "1.0.0"
 repositories {
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-}
-
-dependencies {
-    implementation(compose.web.web)
-    implementation(compose.runtime)
 }
 
 kotlin {
@@ -30,5 +25,13 @@ kotlin {
             }
         }
         binaries.executable()
+    }
+    sourceSets {
+        val jsMain by getting {
+            dependencies {
+                implementation(compose.web.web)
+                implementation(compose.runtime)
+            }
+        }
     }
 }
